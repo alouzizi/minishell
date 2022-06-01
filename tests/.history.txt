@@ -1,0 +1,14 @@
+caskjcn
+caskjcnlscnlkm
+asjnalx
+asjnalx dc
+asckn
+./minishell 
+pwd
+pwd
+./minishell 
+./minishell 
+man signal
+man signal
+echo
+echo s
