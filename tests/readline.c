@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:06:23 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/03 12:42:11 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/03 13:10:55 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,14 @@ int	main(void)
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, &ctl_c);
+	rl_catch_signals = 0;
 	while (1)
 	{
 		fd = cmd_history();
 		s = readline("minishell $ ");
 		if (!s)
 		{
-			printf("exit\n");
+			ft_putstr_fd("\033[A\033[12Cexit\n",1);
 			exit (0);
 		}
 		if (s[0])
