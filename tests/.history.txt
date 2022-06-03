@@ -12,3 +12,4 @@ man signal
 man signal
 echo
 echo s
+bash

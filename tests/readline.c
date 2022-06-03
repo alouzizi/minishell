@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:06:23 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/01 08:02:42 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/03 12:42:11 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,24 @@ int	cmd_history(void)
 	return (fd);
 }
 
+void	ctl_c(int signum)
+{
+	if (signum == SIGINT)
+	{
+		ft_putstr_fd("\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
+}
+
 int	main(void)
 {
 	char	*s;
 	int		fd;
 
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, &ctl_c);
 	while (1)
 	{
 		fd = cmd_history();
