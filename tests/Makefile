@@ -6,8 +6,9 @@ RL_INC	= -I/goinfre/$(USER)/.brew/opt/readline/include
 
 RL_LIB = -L/goinfre/$(USER)/.brew/opt/readline/lib
 
-SRC = gnl/get_next_line.c \
-	gnl/get_next_line_utils.c \
+SRC = exec.c \
+	ft_split.c \
+	ft_str.c \
 	readline.c
 
 OBJ = $(SRC:.c=.o)
@@ -21,7 +22,7 @@ $(NAME) : $(OBJ) test.h
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -l readline $(RL_LIB)
 
 readline :
-	brew install readline && brew update && brew upgrade readline
+	brew update && brew install readline && brew upgrade readline
 
 clean : 
 	@rm -rf $(OBJ)

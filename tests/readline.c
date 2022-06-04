@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:06:23 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/03 19:27:15 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/04 18:19:00 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,13 @@ void	ctl_c(int signum)
 	}
 }
 
-int	main(void)
+int	main(int ac, char **av, char **env)
 {
 	char	*s;
+	int		j;
 
+	(void)ac;
+	(void)av;
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, &ctl_c);
 	rl_catch_signals = 0;
@@ -53,5 +56,6 @@ int	main(void)
 			ft_putstr_fd(CTL_D, 1);
 			exit (0);
 		}
+		execute(s, env);
 	}
 }
