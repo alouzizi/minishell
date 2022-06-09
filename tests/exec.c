@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alouzizi <alouzizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 12:14:09 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/04 20:55:41 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/08 13:57:01 by alouzizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	execute(char *s, char **env)
 	int		i;
 	int		fd;
 
-	i = 0;
+	i = 0; 
 	cmd = ft_split(s, ' ');
-	path = get_path(cmd[0], env);
+	path = getenv("PATH");
 	while (path[i])
 	{
 		if (!access(path[i], X_OK))
