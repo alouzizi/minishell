@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alouzizi <alouzizi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 12:14:09 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/08 13:57:01 by alouzizi         ###   ########.fr       */
+/*   Updated: 2022/06/11 04:01:10 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,9 @@
 char	**get_path(char *s, char **env)
 {
 	int		i;
-	char	*path;
 	char	**paths;
 
-	i = -1;
-	while (env[++i])
-		if (ft_strnstr(env[i], "PATH=", 5))
-			break ;
-	path = ft_strnstr(env[i], "PATH=", 5);
-	paths = ft_split(path, ':');
+	paths = ft_split(getenv("PATH"), ':');
 	i = -1;
 	while (paths[++i])
 	{
@@ -40,9 +34,12 @@ void	execute(char *s, char **env)
 	int		i;
 	int		fd;
 
-	i = 0; 
+	i = 0;
 	cmd = ft_split(s, ' ');
-	path = getenv("PATH");
+	if (cmd[0][0] == '/' || cmd[0][0] == '.')
+		path = cmd;
+	else
+		path = get_path(cmd[0], env);
 	while (path[i])
 	{
 		if (!access(path[i], X_OK))
@@ -53,7 +50,7 @@ void	execute(char *s, char **env)
 	if (!fd)
 	{
 		execve(path[i], cmd, env);
-		exit(0);
+		exit (0);
 	}
 	else
 		waitpid(fd, NULL, 0);

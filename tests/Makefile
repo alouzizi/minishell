@@ -16,10 +16,10 @@ OBJ = $(SRC:.c=.o)
 %.o : %.c
 	@$(CC) $(RL_INC) -I $(RL_INC) -o $@  -c $^
 
-all : $(NAME)
-
 $(NAME) : $(OBJ) test.h 
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -l readline $(RL_LIB)
+
+all : $(NAME)
 
 readline :
 	brew update && brew install readline && brew upgrade readline

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   readline.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alouzizi <alouzizi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:06:23 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/08 15:03:49 by alouzizi         ###   ########.fr       */
+/*   Updated: 2022/06/11 02:59:11 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,12 @@ void	ctl_c(int signum)
 int	main(int ac, char **av, char **env)
 {
 	char	*s;
-	int		j;
-	int i;
 
 	(void)ac;
 	(void)av;
-	i = 0;
-	while(env[i])
-	{
-		printf("%s\n",env[i++]);	
-	}
-	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, &ctl_c);
-	//rl_catch_signals = 0;
+	signal(SIGQUIT, SIG_IGN);
+	rl_catch_signals = 0;
 	while (1)
 	{
 		s = readline("minishell $ ");
@@ -64,4 +57,4 @@ int	main(int ac, char **av, char **env)
 		}
 		execute(s, env);
 	}
-} 
+}
