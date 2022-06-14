@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   readline.c                                         :+:      :+:    :+:   */
+/*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:06:23 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/11 02:59:11 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 00:12:58 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "minishell.h"
 
 void	ft_putstr_fd(char *s, int fd)
 {
@@ -28,7 +28,7 @@ void	ft_putstr_fd(char *s, int fd)
 
 void	ctl_c(int signum)
 {
-	if (signum == SIGINT)
+	if (signum == SIGINT && !l)
 	{
 		ft_putstr_fd("\n", 1);
 		rl_on_new_line();
@@ -48,6 +48,7 @@ int	main(int ac, char **av, char **env)
 	rl_catch_signals = 0;
 	while (1)
 	{
+		l = 0;
 		s = readline("minishell $ ");
 		add_history(s);
 		if (!s)

@@ -6,11 +6,11 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 12:17:38 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/04 20:17:57 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 00:13:19 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "../minishell.h"
 
 static void	ft_free(char **arr)
 {
@@ -46,26 +46,6 @@ static size_t	ft_wcount(char const *s, char c)
 		i++;
 	}
 	return (count);
-}
-
-char	*ft_strdup(const char *s1)
-{
-	int		i;
-	int		l;
-	char	*c;
-
-	i = 0;
-	l = ft_strlen(s1);
-	c = (char *)malloc(sizeof(char) * l + 1);
-	if (!c)
-		return (NULL);
-	while (s1[i])
-	{
-		c[i] = s1[i];
-		i++;
-	}
-	c[i] = '\0';
-	return (c);
 }
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)

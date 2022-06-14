@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.h                                             :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:07:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/04 20:20:33 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 00:13:58 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TEST_H
-# define TEST_H
+#ifndef MINISHELL_H
+# define MINISHELL_H
 
 # define CTL_D "\033[A\033[12Cexit\n"
 
@@ -25,6 +25,8 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+int	l;
+
 void	ft_putstr_fd(char *s, int fd);
 void	ctl_c(int signum);
 size_t	ft_strlen(const char *s);
@@ -35,6 +37,10 @@ char	*ft_substr(char const *s, unsigned int start, size_t len);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
 char	**get_path(char *s, char **env);
+void	ft_pwd(void);
+void	ft_echo(char **cmd);
+int		isbuiltin(char **cmd);
 void	execute(char *s, char **env);
+void	commands_execution(char **path, char **cmd, char **env);
 
 #endif

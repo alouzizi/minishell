@@ -6,11 +6,11 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 12:14:09 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/11 04:01:10 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 00:13:06 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "minishell.h"
 
 char	**get_path(char *s, char **env)
 {
@@ -27,19 +27,48 @@ char	**get_path(char *s, char **env)
 	return (paths);
 }
 
-void	execute(char *s, char **env)
+int	builtincmp(char *s1, char *s2)
 {
-	char	**path;
-	char	**cmd;
-	int		i;
-	int		fd;
+	int	i;
+
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+int	isbuiltin(char **cmd)
+{
+	if (!cmd[0])
+		return (1);
+	if (!builtincmp(cmd[0], "pwd"))
+		return (ft_pwd(), 1);
+	else if (!builtincmp(cmd[0], "echo"))
+		return (ft_echo(cmd), 1);
+	else if (!builtincmp(cmd[0], "env"))
+		return (1);
+	else if (!builtincmp(cmd[0], "export"))
+		return (1);
+	else if (!builtincmp(cmd[0], "cd"))
+		return (1);
+	else if (!builtincmp(cmd[0], "exit"))
+		return (1);
+	else
+		return (0);
+}
+
+void	commands_execution(char **path, char **cmd, char **env)
+{
+	int	fd;
+	int	i;
 
 	i = 0;
-	cmd = ft_split(s, ' ');
-	if (cmd[0][0] == '/' || cmd[0][0] == '.')
-		path = cmd;
-	else
-		path = get_path(cmd[0], env);
 	while (path[i])
 	{
 		if (!access(path[i], X_OK))
@@ -53,5 +82,24 @@ void	execute(char *s, char **env)
 		exit (0);
 	}
 	else
+	{
+		l = 1;
 		waitpid(fd, NULL, 0);
+	}
+}
+
+void	execute(char *s, char **env)
+{
+	char	**path;
+	char	**cmd;
+
+	cmd = ft_split(s, ' ');
+	if (!isbuiltin(cmd))
+	{
+		if (cmd[0][0] == '/' || cmd[0][0] == '.')
+			path = cmd;
+		else
+			path = get_path(cmd[0], env);
+		commands_execution(path, cmd, env);
+	}
 }

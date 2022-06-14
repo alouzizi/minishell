@@ -6,11 +6,11 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 20:16:03 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/04 20:17:48 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 00:13:13 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "test.h"
+#include "../minishell.h"
 
 size_t	ft_strlen(const char *s)
 {
@@ -22,16 +22,24 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+char	*ft_strdup(const char *s1)
 {
-	size_t	i;
+	int		i;
+	int		l;
+	char	*c;
 
 	i = 0;
-	if (n == 0)
-		return (0);
-	while (s1[i] && s2[i] && s1[i] == s2[i] && i < (n - 1))
+	l = ft_strlen(s1);
+	c = (char *)malloc(sizeof(char) * l + 1);
+	if (!c)
+		return (NULL);
+	while (s1[i])
+	{
+		c[i] = s1[i];
 		i++;
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	}
+	c[i] = '\0';
+	return (c);
 }
 
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
