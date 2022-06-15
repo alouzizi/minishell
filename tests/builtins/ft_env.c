@@ -1,42 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/31 01:06:23 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 03:17:06 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/15 00:38:34 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/15 03:10:20 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	prompt_display(char **env)
+void	ft_putstr_fd(char *s, int fd)
 {
-	char	*s;
+	int	i;
 
-	while (1)
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
 	{
-		g_global.l = 0;
-		s = readline("minishell $ ");
-		add_history(s);
-		if (!s)
-		{
-			ft_putstr_fd(CTL_D, 1);
-			exit (0);
-		}
-		execute(s, env);
+		write(fd, &s[i], 1);
+		i++;
 	}
 }
 
-int	main(int ac, char **av, char **env)
+void	ft_putendl_fd(char *s, int fd)
 {
-	(void)av;
-	if (ac != 1)
-		return (1);
-	signal(SIGINT, &ctl_c);
-	signal(SIGQUIT, SIG_IGN);
-	rl_catch_signals = 0;
-	prompt_display(env);
+	int	i;
+
+	i = 0;
+	if (!s)
+		return ;
+	ft_putstr_fd(s, 1);
+	write (fd, "\n", 1);
+}
+
+void	ft_env(char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i++])
+		ft_putendl_fd(env[i], 1);
 }

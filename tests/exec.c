@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 12:14:09 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 00:13:06 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 02:16:56 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	builtincmp(char *s1, char *s2)
 	return (0);
 }
 
-int	isbuiltin(char **cmd)
+int	isbuiltin(char **cmd, char **env)
 {
 	if (!cmd[0])
 		return (1);
@@ -52,8 +52,10 @@ int	isbuiltin(char **cmd)
 	else if (!builtincmp(cmd[0], "echo"))
 		return (ft_echo(cmd), 1);
 	else if (!builtincmp(cmd[0], "env"))
-		return (1);
+		return (ft_env(env), 1);
 	else if (!builtincmp(cmd[0], "export"))
+		return (1);
+	else if (!builtincmp(cmd[0], "unset"))
 		return (1);
 	else if (!builtincmp(cmd[0], "cd"))
 		return (1);
@@ -83,7 +85,7 @@ void	commands_execution(char **path, char **cmd, char **env)
 	}
 	else
 	{
-		l = 1;
+		g_global.l = 1;
 		waitpid(fd, NULL, 0);
 	}
 }
@@ -94,7 +96,7 @@ void	execute(char *s, char **env)
 	char	**cmd;
 
 	cmd = ft_split(s, ' ');
-	if (!isbuiltin(cmd))
+	if (!isbuiltin(cmd, env))
 	{
 		if (cmd[0][0] == '/' || cmd[0][0] == '.')
 			path = cmd;

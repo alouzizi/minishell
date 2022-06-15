@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:07:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 00:13:58 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 02:17:30 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,12 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
-int	l;
+typedef struct s_data
+{
+	int	l;
+}	t_data;
+
+t_data	g_global;
 
 void	ft_putstr_fd(char *s, int fd);
 void	ctl_c(int signum);
@@ -39,7 +44,8 @@ char	*ft_strjoin(char const *s1, char const *s2);
 char	**get_path(char *s, char **env);
 void	ft_pwd(void);
 void	ft_echo(char **cmd);
-int		isbuiltin(char **cmd);
+void	ft_env(char **env);
+int		isbuiltin(char **cmd, char **env);
 void	execute(char *s, char **env);
 void	commands_execution(char **path, char **cmd, char **env);
 

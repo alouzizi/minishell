@@ -7,8 +7,10 @@ RL_INC	= -I/goinfre/$(USER)/.brew/opt/readline/include
 RL_LIB = -L/goinfre/$(USER)/.brew/opt/readline/lib
 
 SRC = exec.c \
+	signal.c \
 	builtins/ft_echo.c \
 	builtins/ft_pwd.c \
+	builtins/ft_env.c \
 	utils/ft_split.c \
 	utils/ft_str.c \
 	minishell.c

@@ -6,13 +6,13 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 12:17:38 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 00:13:19 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 03:14:37 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-static void	ft_free(char **arr)
+static void	free_arr(char **arr)
 {
 	int	i;
 
@@ -90,7 +90,7 @@ char	**ft_split(char const *s, char c)
 		if (*s != c && *s)
 			arr[j++] = ft_substr(s, 0, i);
 		if (*s && (!arr[j - 1]))
-			ft_free(arr);
+			free_arr(arr);
 		s += i;
 	}
 	arr[j] = NULL;

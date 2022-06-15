@@ -1,42 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/31 01:06:23 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 03:17:06 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/15 03:09:46 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/15 03:17:26 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	prompt_display(char **env)
+void	ctl_c(int signum)
 {
-	char	*s;
-
-	while (1)
+	if (signum == SIGINT && !g_global.l)
 	{
-		g_global.l = 0;
-		s = readline("minishell $ ");
-		add_history(s);
-		if (!s)
-		{
-			ft_putstr_fd(CTL_D, 1);
-			exit (0);
-		}
-		execute(s, env);
+		ft_putstr_fd("\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
-}
-
-int	main(int ac, char **av, char **env)
-{
-	(void)av;
-	if (ac != 1)
-		return (1);
-	signal(SIGINT, &ctl_c);
-	signal(SIGQUIT, SIG_IGN);
-	rl_catch_signals = 0;
-	prompt_display(env);
 }
