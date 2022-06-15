@@ -6,45 +6,59 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:38:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 11:29:53 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 16:44:23 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	arr_len(char **arr)
+void	shlvl_handling(char **env, int i)
 {
-	int	i;
+	char	*tmp;
+	char	*s;
+	int		t;
 
-	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
+	tmp = ft_strdup("SHLVL=");
+	s = ft_strrchr(env[i], '=');
+	++s;
+	t = ft_atoi(s) + 1;
+	if (t < 0)
+		t = 0;
+	s = ft_itoa(t);
+	env[i] = ft_strjoin(tmp, s);
+	free(s);
+	free(tmp);
 }
 
-char	**ft_arr_copy(char **arr)
+void	ft_update_env(char **env)
 {
-	char	**copy;
-	int		i;
+	int	i;
+	int	k;
 
-	i = 0;
-	copy = malloc(sizeof(char *) * arr_len(arr) + 1);
-	while (arr[i])
+	i = -1;
+	while (env[++i])
 	{
-		copy[i] = ft_strdup(arr[i]);
+		if (!ft_strncmp("SHLVL=", env[i], ft_strlen("SHLVL=")))
+		{
+			k = 1;
+			shlvl_handling(env, i);
+		}
+		else
+			env[i] = ft_strdup(env[i]);
+	}
+	if (k != 1)
+	{
+		env[i] = ft_strdup("SHLVL=1");
 		i++;
 	}
-	copy[i + 1] = 0;
-	return (copy);
+	env[i] = NULL;
 }
 
 void	ft_env(char **env)
 {
-	char	**copy;
-	int		i;
+	int	i;
 
-	copy = ft_arr_copy(env);
-	i = 0;
-	while (copy[i++])
-		ft_putendl_fd(copy[i], 1);
+	i = -1;
+	while (env[++i])
+		printf("%s\n", env[i]);
 }

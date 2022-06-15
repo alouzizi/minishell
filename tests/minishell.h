@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:07:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 11:16:28 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 16:41:10 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-# include "../libft/libft.h"
+# include "libft/libft.h"
 # include <sys/types.h>
 # include <sys/wait.h>
 
@@ -40,8 +40,8 @@ char	**get_path(char *s, char **env);
 void	ft_minishell(char **cmd, char **env);
 void	ft_pwd(void);
 void	ft_echo(char **cmd);
-int		arr_len(char **arr);
-char	**ft_arr_copy(char **arr);
+void	shlvl_handling(char **env, int i);
+void	ft_update_env(char **env);
 void	ft_env(char **env);
 int		builtincmp(char *s1, char *s2);
 int		isbuiltin(char **cmd, char **env);

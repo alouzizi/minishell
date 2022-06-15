@@ -50,15 +50,18 @@ CFLAGS = -Wall -Werror -Wextra
 RM = rm -f
 AR = @ar -rcs
 
+%.o : %.c
+	@$(CC) $(CFLAGS) -o $@  -c $^
+
 all: $(NAME)
 
 $(NAME):$(OBJS) $(INC)
-	$(AR) $(NAME) $(OBJS)
+	@$(AR) $(NAME) $(OBJS)
 
 clean:
-	$(RM) $(OBJS) $(B_OBJS)
+	@$(RM) $(OBJS) $(B_OBJS)
 
 fclean:clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re: fclean all
