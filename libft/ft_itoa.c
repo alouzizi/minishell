@@ -3,54 +3,59 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
+/*   By: alouzizi <alouzizi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 11:15:52 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 12:10:35 by ooumlil          ###   ########.fr       */
+/*   Created: 2021/11/14 11:36:36 by alouzizi          #+#    #+#             */
+/*   Updated: 2021/11/15 18:04:14 by alouzizi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-static size_t	tot_dig(int n)
+static int	len(long nb)
 {
-	size_t	i;
+	int	len;
 
-	i = 0;
-	if (n <= 0)
-		i++;
-	while (n)
+	len = 0;
+	if (nb == 0)
+		len = 1;
+	while (nb < 0)
 	{
-		i++;
-		n = n / 10;
+		nb = nb * -1;
+		len++;
 	}
-	return (i);
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		len++;
+	}
+	return (len);
 }
 
 char	*ft_itoa(int n)
 {
-	size_t	sl;
-	long	d;
 	char	*s;
+	int		i;
 
-	sl = tot_dig(n);
-	d = n;
-	s = malloc(sl + 1);
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	i = len(n);
+	s = (char *)malloc(sizeof(char) * (i + 1));
 	if (!s)
 		return (NULL);
-	while (d < 0)
+	s[i--] = '\0';
+	if (n == 0)
+		s[0] = 48;
+	if (n < 0)
 	{
 		s[0] = '-';
-		d = d * -1;
+		n = n * -1;
 	}
-	if (d == 0)
-		s[0] = '0';
-	s[sl--] = '\0';
-	while (d != 0)
+	while (n > 0)
 	{
-		s[sl] = d % 10 + '0';
-		sl--;
-		d = d / 10;
+		s[i] = (n % 10) + '0';
+		n = n / 10;
+		i--;
 	}
 	return (s);
 }

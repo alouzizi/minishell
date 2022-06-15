@@ -24,6 +24,9 @@
 # include <termios.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include "../libft/libft.h"
+# include <sys/types.h>
+# include <sys/wait.h>
 
 typedef struct s_data
 {
@@ -32,18 +35,7 @@ typedef struct s_data
 
 t_data	g_global;
 
-void	ft_putstr_fd(char *s, int fd);
-void	ft_putendl_fd(char *s, int fd);
 void	ctl_c(int signum);
-size_t	ft_strlen(const char *s);
-char	*ft_strrchr(char *s, int c);
-char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_itoa(int n);
-char	*ft_strdup(const char *s1);
-char	*ft_substr(char const *s, unsigned int start, size_t len);
-char	**ft_split(char const *s, char c);
-char	*ft_strjoin(char const *s1, char const *s2);
 char	**get_path(char *s, char **env);
 void	ft_minishell(char **cmd, char **env);
 void	ft_pwd(void);
