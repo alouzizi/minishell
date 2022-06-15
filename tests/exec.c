@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 12:14:09 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 16:41:27 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 17:36:14 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	**get_path(char *s, char **env)
 		paths[i] = ft_strjoin(paths[i], "/");
 		paths[i] = ft_strjoin(paths[i], s);
 	}
+	free (s);
 	return (paths);
 }
 
@@ -56,7 +57,7 @@ int	isbuiltin(char **cmd, char **env)
 	else if (!builtincmp(cmd[0], "env"))
 		return (ft_env(env), 1);
 	else if (!builtincmp(cmd[0], "export"))
-		return (1);
+		return (ft_export(env), 1);
 	else if (!builtincmp(cmd[0], "unset"))
 		return (1);
 	else if (!builtincmp(cmd[0], "cd"))
@@ -69,8 +70,8 @@ int	isbuiltin(char **cmd, char **env)
 
 void	commands_execution(char **path, char **cmd, char **env)
 {
-	int	fd;
-	int	i;
+	int		fd;
+	int		i;
 
 	i = -1;
 	while (path[++i])

@@ -1,27 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/08 18:13:12 by alouzizi          #+#    #+#             */
-/*   Updated: 2022/06/15 19:06:00 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/15 17:36:25 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/15 19:50:09 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../minishell.h"
 
-char	*ft_strrchr(const char *s, int c)
+void	print_export(char **env)
 {
 	int	i;
+	int	j;
+	int	n;
 
-	i = ft_strlen(s);
-	while (i >= 0)
+	i = 0;
+	while (env[i])
 	{
-		if (s[i] == (char)c)
-			return ((char *)&s[i]);
-		i--;
+		j = 0;
+		n = 0;
+		while (env[i][j])
+		{
+			ft_putchar_fd(env[i][j], 1);
+			if (env[i][j] == '=' && n == 0)
+			{
+				ft_putchar_fd('\"', 1);
+				n++;
+			}
+			if (!env[i][j + 1] && n != 0)
+				ft_putchar_fd('\"', 1);
+			j++;
+		}
+		ft_putchar_fd('\n', 1);
+		i++;
 	}
-	return (NULL);
+}
+
+void	ft_export(char **env)
+{
+	print_export(env);
 }

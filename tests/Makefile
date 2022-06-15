@@ -11,6 +11,7 @@ SRC = exec.c \
 	builtins/ft_echo.c \
 	builtins/ft_pwd.c \
 	builtins/ft_env.c \
+	builtins/ft_export.c \
 	builtins/ft_minishell.c \
 	main.c
 

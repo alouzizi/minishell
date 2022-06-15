@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:38:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 16:44:23 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 17:31:41 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,8 @@ void	ft_update_env(char **env)
 			env[i] = ft_strdup(env[i]);
 	}
 	if (k != 1)
-	{
 		env[i] = ft_strdup("SHLVL=1");
-		i++;
-	}
-	env[i] = NULL;
+	env[i + 1] = NULL;
 }
 
 void	ft_env(char **env)

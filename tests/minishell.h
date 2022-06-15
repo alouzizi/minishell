@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:07:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 16:41:10 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 19:50:30 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void	ft_echo(char **cmd);
 void	shlvl_handling(char **env, int i);
 void	ft_update_env(char **env);
 void	ft_env(char **env);
+void	print_export(char **env);
+void	ft_export(char **env);
 int		builtincmp(char *s1, char *s2);
 int		isbuiltin(char **cmd, char **env);
 void	execute(char *s, char **env);
