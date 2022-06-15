@@ -1,50 +1,52 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   ft_str2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 00:38:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 11:29:53 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/15 10:35:17 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/15 10:36:33 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	arr_len(char **arr)
+void	ft_putstr_fd(char *s, int fd)
+{
+	int	i;
+
+	if (!s)
+		return ;
+	i = 0;
+	while (s[i])
+	{
+		write(fd, &s[i], 1);
+		i++;
+	}
+}
+
+void	ft_putendl_fd(char *s, int fd)
 {
 	int	i;
 
 	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
+	if (!s)
+		return ;
+	ft_putstr_fd(s, 1);
+	write (fd, "\n", 1);
 }
 
-char	**ft_arr_copy(char **arr)
+char	*ft_strrchr(char *s, int c)
 {
-	char	**copy;
-	int		i;
+	int	i;
 
-	i = 0;
-	copy = malloc(sizeof(char *) * arr_len(arr) + 1);
-	while (arr[i])
+	i = (int) ft_strlen(s);
+	while (i >= 0)
 	{
-		copy[i] = ft_strdup(arr[i]);
-		i++;
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i--;
 	}
-	copy[i + 1] = 0;
-	return (copy);
-}
-
-void	ft_env(char **env)
-{
-	char	**copy;
-	int		i;
-
-	copy = ft_arr_copy(env);
-	i = 0;
-	while (copy[i++])
-		ft_putendl_fd(copy[i], 1);
+	return (NULL);
 }

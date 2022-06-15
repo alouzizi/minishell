@@ -11,10 +11,11 @@ SRC = exec.c \
 	builtins/ft_echo.c \
 	builtins/ft_pwd.c \
 	builtins/ft_env.c \
-	builtins/ft_minishell.c \
 	utils/ft_split.c \
 	utils/ft_str.c \
-	minishell.c
+	utils/ft_str2.c \
+	utils/ft_itoa.c \
+	main.c
 
 OBJ = $(SRC:.c=.o)
 
