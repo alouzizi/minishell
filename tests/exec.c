@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 12:14:09 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 02:16:56 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 07:44:13 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,14 @@ int	builtincmp(char *s1, char *s2)
 	return (0);
 }
 
+
+
 int	isbuiltin(char **cmd, char **env)
 {
 	if (!cmd[0])
 		return (1);
+	else if (!builtincmp(cmd[0], "minishell"))
+		return (ft_minishell(cmd, env), 1);
 	if (!builtincmp(cmd[0], "pwd"))
 		return (ft_pwd(), 1);
 	else if (!builtincmp(cmd[0], "echo"))

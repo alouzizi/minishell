@@ -1,42 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_minishell.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/31 01:06:23 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 03:42:25 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/15 07:44:23 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/15 07:44:37 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	prompt_display(char **env)
+void	ft_minishell(char **cmd, char **env)
 {
-	char	*s;
+	int		fd;
 
-	while (1)
+	fd = fork();
+	if (!fd)
 	{
-		g_global.l = 0;
-		s = readline("minishell $ ");
-		add_history(s);
-		if (!s)
-		{
-			ft_putstr_fd(CTL_D, 1);
-			exit (0);
-		}
-		execute(s, env);
+		execve("minishell", cmd, env);
+		exit (0);
 	}
-}
-
-int	main(int ac, char **av, char **env)
-{
-	(void)av;
-	if (ac != 1)
-		return (1);
-	signal(SIGINT, &ctl_c);
-	signal(SIGQUIT, SIG_IGN);
-	rl_catch_signals = 0;
-	prompt_display(env);
+	else
+	{
+		g_global.l = 1;
+		waitpid(fd, NULL, 0);
+	}
 }

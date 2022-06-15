@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 00:38:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 03:10:20 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/15 07:22:51 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,39 @@ void	ft_putendl_fd(char *s, int fd)
 	write (fd, "\n", 1);
 }
 
-void	ft_env(char **env)
+int	arr_len(char **arr)
 {
 	int	i;
 
 	i = 0;
-	while (env[i++])
-		ft_putendl_fd(env[i], 1);
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+char	**ft_arr_copy(char **arr)
+{
+	char	**copy;
+	int		i;
+
+	i = 0;
+	copy = malloc(sizeof(char *) * arr_len(arr) + 1);
+	while (arr[i])
+	{
+		copy[i] = ft_strdup(arr[i]);
+		i++;
+	}
+	copy[i + 1] = 0;
+	return (copy);
+}
+
+void	ft_env(char **env)
+{
+	char	**copy;
+	int		i;
+
+	copy = ft_arr_copy(env);
+	i = 0;
+	while (copy[i++])
+		ft_putendl_fd(copy[i], 1);
 }
