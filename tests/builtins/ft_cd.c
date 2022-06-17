@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.c                                     :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 14:33:00 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/16 14:54:46 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/17 10:52:24 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/17 23:01:38 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_minishell(char **cmd, char **env)
+void	ft_cd(char **cmd, char **env)
 {
-	int		fd;
-
-	fd = fork();
-	if (!fd)
+	if (!cmd[1])
 	{
-		execve("minishell", cmd, env);
-		exit (0);
+		if (chdir(getenv("HOME")))
+			perror("minishell : cd:");
 	}
 	else
 	{
-		g_global.l = 1;
-		waitpid(fd, NULL, 0);
+		if (chdir(cmd[1]))
+			perror("minishell : cd ");
 	}
 }

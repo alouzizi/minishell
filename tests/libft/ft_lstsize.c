@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.c                                     :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 14:33:00 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/16 14:54:46 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/18 00:20:11 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/18 00:20:14 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-void	ft_minishell(char **cmd, char **env)
+int	ft_lstsize(t_list *lst)
 {
-	int		fd;
+	int	count;
 
-	fd = fork();
-	if (!fd)
+	count = 0;
+	while (lst)
 	{
-		execve("minishell", cmd, env);
-		exit (0);
+		count++;
+		lst = lst -> next;
 	}
-	else
-	{
-		g_global.l = 1;
-		waitpid(fd, NULL, 0);
-	}
+	return (count);
 }

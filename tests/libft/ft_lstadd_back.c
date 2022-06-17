@@ -1,30 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.c                                     :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 14:33:00 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/16 14:54:46 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/18 00:18:51 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/18 00:18:54 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "libft.h"
 
-void	ft_minishell(char **cmd, char **env)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	int		fd;
+	t_list	*head;
 
-	fd = fork();
-	if (!fd)
+	if (*lst)
 	{
-		execve("minishell", cmd, env);
-		exit (0);
+		head = *lst;
+		head = ft_lstlast(head);
+		head -> next = new;
 	}
 	else
-	{
-		g_global.l = 1;
-		waitpid(fd, NULL, 0);
-	}
+		(*lst) = new;
 }

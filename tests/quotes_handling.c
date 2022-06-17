@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.c                                     :+:      :+:    :+:   */
+/*   quotes_handling.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 14:33:00 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/16 14:54:46 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/16 12:11:21 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/16 15:10:05 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-void	ft_minishell(char **cmd, char **env)
+int	quotes_counting(char *s)
 {
-	int		fd;
+	int	i;
+	int	count;
 
-	fd = fork();
-	if (!fd)
+	i = -1;
+	count = 0;
+	while (s[++i])
 	{
-		execve("minishell", cmd, env);
-		exit (0);
+		if (s[i] && s[i] == '\'')
+		{
+			i++;
+			count++;
+			while (s[i] && s[i] != '\'')
+				i++;
+		}
+		else if (s[i] && s[i] == '"')
+		{
+			i++;
+			count++;
+			while (s[i] && s[i] != '"')
+				i++;
+		}
+		if (s[i] == '\'' || s[i] == '"')
+			count++;
 	}
-	else
-	{
-		g_global.l = 1;
-		waitpid(fd, NULL, 0);
-	}
+	return (count % 2);
 }

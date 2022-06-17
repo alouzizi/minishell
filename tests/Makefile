@@ -8,11 +8,14 @@ RL_LIB = -L/goinfre/$(USER)/.brew/opt/readline/lib
 
 SRC = exec.c \
 	signal.c \
+	quotes_handling.c \
 	builtins/ft_echo.c \
 	builtins/ft_pwd.c \
 	builtins/ft_env.c \
 	builtins/ft_export.c \
+	builtins/ft_cd.c \
 	builtins/ft_minishell.c \
+	utils/sorting.c \
 	main.c
 
 OBJ = $(SRC:.c=.o)
@@ -30,7 +33,7 @@ $(LIBFT) :
 all : $(NAME)
 
 readline :
-	brew update && brew install readline
+	brew install readline
 
 clean :
 	@make  clean -C libft

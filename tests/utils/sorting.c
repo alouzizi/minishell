@@ -1,53 +1,58 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_export.c                                        :+:      :+:    :+:   */
+/*   sorting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 17:36:25 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/18 00:54:00 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/16 15:11:06 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/18 00:51:15 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	print_export(char **copy)
+void	sort_array_alphabetically(char **arr)
 {
 	int		i;
 	int		j;
-	int		n;
 
 	i = 0;
-	sort_array_alphabetically(copy);
-	while (copy[++i])
+	while (arr[i])
 	{
-		j = 0;
-		n = 0;
-		ft_putstr_fd("declare -x ", 1);
-		while (copy[i][j])
+		j = i + 1;
+		while (arr[j])
 		{
-			ft_putchar_fd(copy[i][j], 1);
-			if (copy[i][j] == '=' && n == 0)
-			{
-				ft_putchar_fd('\"', 1);
-				n++;
-			}
-			if (!copy[i][j + 1] && n != 0)
-				ft_putchar_fd('\"', 1);
+			if (ft_strcmp(arr[i], arr[j]) > 0)
+				ft_swap(&arr[i], &arr[j]);
 			j++;
 		}
-		ft_putchar_fd('\n', 1);
+		i++;
 	}
 }
 
-void	ft_export(char **cmd, char **env)
+int	arr_len(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+char	**ft_arr_copy(char **arr)
 {
 	char	**copy;
+	int		i;
 
-	if (!cmd[1])
+	i = 0;
+	copy = malloc(sizeof(char *) * arr_len(arr) + 1);
+	while (arr[i])
 	{
-		copy = ft_arr_copy(env);
-		print_export(copy);
+		copy[i] = ft_strdup(arr[i]);
+		i++;
 	}
+	copy[i + 1] = 0;
+	return (copy);
 }

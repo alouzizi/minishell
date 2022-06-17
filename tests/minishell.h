@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:07:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/15 19:50:30 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/17 23:28:56 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,12 @@ typedef struct s_data
 
 t_data	g_global;
 
+char	**ft_arr_copy(char **arr);
+void	sort_array_alphabetically(char **arr);
+int		arr_len(char **arr);
 void	ctl_c(int signum);
+void	sig_reset(void);
+int		quotes_counting(char *s);
 char	**get_path(char *s, char **env);
 void	ft_minishell(char **cmd, char **env);
 void	ft_pwd(void);
@@ -43,8 +48,10 @@ void	ft_echo(char **cmd);
 void	shlvl_handling(char **env, int i);
 void	ft_update_env(char **env);
 void	ft_env(char **env);
-void	print_export(char **env);
-void	ft_export(char **env);
+void	sort_array_alphabetically(char **arr);
+void	print_export(char **arr);
+void	ft_export(char **cmd, char **env);
+void	ft_cd(char **cmd, char **env);
 int		builtincmp(char *s1, char *s2);
 int		isbuiltin(char **cmd, char **env);
 void	execute(char *s, char **env);
