@@ -1,16 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting.c                                          :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:11:06 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/18 00:51:15 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/21 06:28:12 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+int	arr_len(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while (arr[i])
+		i++;
+	return (i);
+}
+
+char	**ft_arr_copy(char **arr)
+{
+	char	**copy;
+	int		i;
+
+	i = 0;
+	copy = (char **)malloc(sizeof(char *) * arr_len(arr) + 1);
+	while (arr[i])
+	{
+		copy[i] = ft_strdup(arr[i]);
+		i++;
+	}
+	copy[i + 1] = 0;
+	return (copy);
+}
 
 void	sort_array_alphabetically(char **arr)
 {
@@ -31,28 +57,24 @@ void	sort_array_alphabetically(char **arr)
 	}
 }
 
-int	arr_len(char **arr)
+void	add_var_to_env(char *var, char **env)
+{
+	int	arr_size;
+
+	arr_size = arr_len(env);
+	env[arr_size] = ft_strdup(var);
+	env[arr_size + 1] = NULL;
+}
+
+void	add_variable(char *arg, char **env)
 {
 	int	i;
 
-	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
-}
-
-char	**ft_arr_copy(char **arr)
-{
-	char	**copy;
-	int		i;
-
-	i = 0;
-	copy = malloc(sizeof(char *) * arr_len(arr) + 1);
-	while (arr[i])
+	i = -1;
+	while (env[++i])
 	{
-		copy[i] = ft_strdup(arr[i]);
-		i++;
+		if (!ft_strcmp(arg, env[i]))
+			return ;
 	}
-	copy[i + 1] = 0;
-	return (copy);
+	add_var_to_env(arg, env);
 }

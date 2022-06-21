@@ -15,7 +15,7 @@ SRC = exec.c \
 	builtins/ft_export.c \
 	builtins/ft_cd.c \
 	builtins/ft_minishell.c \
-	utils/sorting.c \
+	utils/export.c \
 	main.c
 
 OBJ = $(SRC:.c=.o)

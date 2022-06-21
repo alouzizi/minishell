@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:07:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/17 23:28:56 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/21 06:01:58 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	ft_echo(char **cmd);
 void	shlvl_handling(char **env, int i);
 void	ft_update_env(char **env);
 void	ft_env(char **env);
+int		ft_strchr_index(const char *s, int c);
+void	add_var_to_env(char *var, char **env);
+void	add_to_value(char *arg, char **env, int i);
+void	add_to_env(char *var, char **env);
+void	add_to_export(char **env, char **cmd);
 void	sort_array_alphabetically(char **arr);
 void	print_export(char **arr);
 void	ft_export(char **cmd, char **env);
