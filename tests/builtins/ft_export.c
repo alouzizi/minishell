@@ -6,16 +6,15 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 17:36:25 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/21 06:28:07 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/22 08:13:06 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	add_to_value(char *arg, char **env, int i)
+void	add_to_value(char *arg, char **env, int i, int ptr)
 {
 	int		index;
-	int		ptr;
 	char	*value;
 
 	index = 0;
@@ -81,7 +80,7 @@ void	add_to_export(char **env, char **cmd)
 			if (cmd[i][j] == '=')
 				add_to_env(cmd[i], env);
 			else if (cmd[i][j] == '+' && cmd[i][j + 1] == '=')
-				add_to_value(cmd[i], env, -1);
+				add_to_value(cmd[i], env, -1, 0);
 			else if (cmd[i][j] != '+' && cmd[i][j + 1] != '=')
 				add_variable(cmd[i], env);
 		}
@@ -121,11 +120,9 @@ void	ft_export(char **cmd, char **env)
 {
 	char	**copy;
 
+	copy = ft_arr_copy(env);
 	if (!cmd[1])
-	{
-		copy = ft_arr_copy(env);
 		print_export(copy);
-	}
 	else
 		add_to_export(env, cmd);
 }

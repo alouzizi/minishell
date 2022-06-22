@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/15 03:09:46 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/22 02:43:49 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/21 09:07:12 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/22 08:05:43 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-void	ctl_c(int signum)
+void	remove_from_env(char **cmd, char **env)
 {
-	if (signum == SIGINT && !g_global.l)
+	int	i;
+	int	j;
+
+	i = -1;
+	j = 1;
+	while (env[++i] && cmd[j])
 	{
-		ft_putstr_fd("\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (!ft_strncmp(env[i], cmd[j], ft_strlen(cmd[j])))
+		{
+			env[i] = ft_strdup("");
+			j++;
+		}
 	}
-	else if (signum == SIGINT && g_global.l)
-	{
-		ft_putstr_fd("\n", 1);
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+}
+
+void	ft_unset(char **cmd, char **env)
+{
+	if (!cmd[1])
+		return ;
+	else
+		remove_from_env(cmd, env);
 }

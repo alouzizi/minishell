@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 01:07:34 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/21 06:01:58 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/22 08:13:34 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,28 +35,47 @@ typedef struct s_data
 
 t_data	g_global;
 
-char	**ft_arr_copy(char **arr);
-void	sort_array_alphabetically(char **arr);
-int		arr_len(char **arr);
+int		quotes_counting(char *s);
+
+void	free_arr(char **arr);
+
+//signals
 void	ctl_c(int signum);
 void	sig_reset(void);
-int		quotes_counting(char *s);
-char	**get_path(char *s, char **env);
-void	ft_minishell(char **cmd, char **env);
+
+//pwd
 void	ft_pwd(void);
+
+//echo
 void	ft_echo(char **cmd);
+
+//env
 void	shlvl_handling(char **env, int i);
 void	ft_update_env(char **env);
 void	ft_env(char **env);
-int		ft_strchr_index(const char *s, int c);
+
+//export
+char	**ft_arr_copy(char **arr);
+void	sort_array_alphabetically(char **arr);
+int		arr_len(char **arr);
 void	add_var_to_env(char *var, char **env);
-void	add_to_value(char *arg, char **env, int i);
+void	add_to_value(char *arg, char **env, int i, int ptr);
 void	add_to_env(char *var, char **env);
+void	add_variable(char *arg, char **env);
 void	add_to_export(char **env, char **cmd);
 void	sort_array_alphabetically(char **arr);
 void	print_export(char **arr);
 void	ft_export(char **cmd, char **env);
+
+//unset
+void	ft_unset(char **cmd, char **env);
+
+//cd
 void	ft_cd(char **cmd, char **env);
+
+//executing
+char	**get_path(char *s, char **env);
+void	ft_minishell(char **cmd, char **env);
 int		builtincmp(char *s1, char *s2);
 int		isbuiltin(char **cmd, char **env);
 void	execute(char *s, char **env);

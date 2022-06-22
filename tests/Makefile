@@ -13,9 +13,10 @@ SRC = exec.c \
 	builtins/ft_pwd.c \
 	builtins/ft_env.c \
 	builtins/ft_export.c \
+	builtins/export.c \
 	builtins/ft_cd.c \
 	builtins/ft_minishell.c \
-	utils/export.c \
+	builtins/ft_unset.c \
 	main.c
 
 OBJ = $(SRC:.c=.o)

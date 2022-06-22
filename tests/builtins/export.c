@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/16 15:11:06 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/21 06:28:12 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/22 03:17:11 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	sort_array_alphabetically(char **arr)
 {
 	int		i;
 	int		j;
+	char	*tmp;
 
 	i = 0;
 	while (arr[i])
@@ -50,7 +51,11 @@ void	sort_array_alphabetically(char **arr)
 		while (arr[j])
 		{
 			if (ft_strcmp(arr[i], arr[j]) > 0)
-				ft_swap(&arr[i], &arr[j]);
+			{
+				tmp = arr[i];
+				arr[i] = arr[j];
+				arr[j] = tmp;
+			}
 			j++;
 		}
 		i++;

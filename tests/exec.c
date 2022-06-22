@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/04 12:14:09 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/19 18:38:52 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/06/21 09:08:09 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	isbuiltin(char **cmd, char **env)
 	else if (!builtincmp(cmd[0], "export"))
 		return (ft_export(cmd, env), 1);
 	else if (!builtincmp(cmd[0], "unset"))
-		return (1);
+		return (ft_unset(cmd, env), 1);
 	else if (!builtincmp(cmd[0], "cd"))
 		return (ft_cd(cmd, env), 1);
 	else if (!builtincmp(cmd[0], "exit"))
