@@ -1,42 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quotes_handling.c                                  :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/16 12:11:21 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/18 12:43:59 by ooumlil          ###   ########.fr       */
+/*   Created: 2022/06/22 08:16:26 by ooumlil           #+#    #+#             */
+/*   Updated: 2022/06/22 08:22:21 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../minishell.h"
 
-int	quotes_counting(char *s)
+void	ft_exit(char **cmd)
 {
-	int	i;
-	int	count;
-
-	i = -1;
-	count = 0;
-	while (s[++i])
-	{
-		if (s[i] && s[i] == '\'')
-		{
-			i++;
-			count++;
-			while (s[i] && s[i] != '\'')
-				i++;
-		}
-		else if (s[i] && s[i] == '"')
-		{
-			i++;
-			count++;
-			while (s[i] && s[i] != '"')
-				i++;
-		}
-		if (s[i] == '\'' || s[i] == '"')
-			count++;
-	}
-	return (count % 2);
+	if (!cmd[1])
+		exit (0);
+	else
+		exit(ft_atoi(cmd[1]));
 }

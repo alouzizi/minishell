@@ -8,7 +8,7 @@ RL_LIB = -L/goinfre/$(USER)/.brew/opt/readline/lib
 
 SRC = exec.c \
 	signal.c \
-	quotes_handling.c \
+	parsing/quotes_handling.c \
 	builtins/ft_echo.c \
 	builtins/ft_pwd.c \
 	builtins/ft_env.c \
@@ -17,6 +17,7 @@ SRC = exec.c \
 	builtins/ft_cd.c \
 	builtins/ft_minishell.c \
 	builtins/ft_unset.c \
+	builtins/ft_exit.c \
 	main.c
 
 OBJ = $(SRC:.c=.o)
