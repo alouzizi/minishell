@@ -6,7 +6,7 @@
 /*   By: ooumlil <ooumlil@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 14:33:00 by ooumlil           #+#    #+#             */
-/*   Updated: 2022/06/16 14:54:46 by ooumlil          ###   ########.fr       */
+/*   Updated: 2022/07/25 04:55:19 by ooumlil          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_minishell(char **cmd, char **env)
 	}
 	else
 	{
-		g_global.l = 1;
+		g_global.signal = 1;
 		waitpid(fd, NULL, 0);
 	}
 }

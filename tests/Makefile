@@ -9,6 +9,8 @@ RL_LIB = -L/goinfre/$(USER)/.brew/opt/readline/lib
 SRC = exec.c \
 	signal.c \
 	parsing/quotes_handling.c \
+	parsing/split_args.c \
+	parsing/dollar_handling.c \
 	builtins/ft_echo.c \
 	builtins/ft_pwd.c \
 	builtins/ft_env.c \
